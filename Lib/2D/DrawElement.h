@@ -1,0 +1,56 @@
+#pragma once
+
+//-----------------------------------------------------------------------------------------
+// Include
+//-----------------------------------------------------------------------------------------
+#include <cstdint>
+#include <Novice.h>
+#include "MyVector2.h"
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// DrawType enum
+////////////////////////////////////////////////////////////////////////////////////////////
+enum DrawType {
+	kLine,
+	kTriangle,
+	kEllipse,
+	kBox,
+	kQuad,
+	kSprite,
+	kSpriteRect
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// DrawElement class
+////////////////////////////////////////////////////////////////////////////////////////////
+class DrawElement {
+public:
+
+	DrawType type;
+
+	Vector2f pos[4];
+	Vector2f size;
+
+	float angle;
+	uint32_t color;
+
+	FillMode fillMode   = kFillModeSolid;
+	BlendMode blendMode = kBlendModeNormal;
+	
+	int textureHandle;
+	Vector2i textureFullSize;
+	Vector2i textureRectPos;
+	Vector2i textureRectSize;
+
+	void Draw() const;
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////
+// SortDrawElement class
+////////////////////////////////////////////////////////////////////////////////////////////
+class SortDrawElement
+	: public DrawElement {
+public:
+
+	float depth;
+};
